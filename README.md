@@ -5,7 +5,7 @@ Peer review in progress.
 
 JSON Templates:
 
-code(
+`
     {
     "firstName": " ",
     "lastName": " ",
@@ -13,9 +13,9 @@ code(
     "checkPassword": " ",
     "password": " "
     }
-)
+`
 
-code(
+`
     {
         "userId": ,
         "title": " ",
@@ -23,7 +23,7 @@ code(
         "estimatedTime": " ",
         "materialsNeeded": " "
     }
-)
+`
 
 
 ~ryan 
