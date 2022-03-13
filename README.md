@@ -5,7 +5,7 @@ Peer review in progress.
 
 JSON Templates:
 
-Markup :  `code(
+code(
     {
     "firstName": " ",
     "lastName": " ",
@@ -13,9 +13,9 @@ Markup :  `code(
     "checkPassword": " ",
     "password": " "
     }
-)`
+)
 
-Markup :  `code(
+code(
     {
         "userId": ,
         "title": " ",
@@ -23,7 +23,7 @@ Markup :  `code(
         "estimatedTime": " ",
         "materialsNeeded": " "
     }
-)`
+)
 
 
 ~ryan 
