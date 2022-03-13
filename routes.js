@@ -81,7 +81,7 @@ router.get("/courses/:id", asyncHandler(async (req, res) => {
   if(course) {
     res.status(200).json({ message: 'Course Found!', course, });
   } else {
-        res.status(404).json({ message: 'Course Not Found!' });
+        res.status(404).json({ message: 'Course Not Found. :(' });
       }  
 }));
 // POST create a new course.
@@ -112,12 +112,12 @@ router.put('/courses/:id', authenticateUser, asyncHandler(async(req, res) => {
     if (course) {
       if (course.userId === user.id) {
         await course.update(req.body);
-        res.status(204).json({ message: 'Course successfully updated a course!' }).end();
+        res.status(204).json({ message: 'Course successfully updated!' }).end();
       } else {
         res.status(403).json({ message: 'You shall not edit!' });       
       }      
     } else {
-      res.status(404).json({ message: 'Course Not Found!' });
+      res.status(404).json({ message: 'Course Not Found. :(' });
     }  
   } catch (error) {
       console.log('ERROR: ', error.name);
@@ -138,12 +138,12 @@ router.delete('/courses/:id', authenticateUser, asyncHandler(async(req, res) => 
   if (course) {
     if (course.userId === user.id) {
       await course.destroy();
-      res.status(204).json({ message: 'Course successfully deleted a course!' }).end();  
+      res.status(204).json({ message: 'Course successfully deleted!' }).end();  
     } else {
         res.status(403).json({ message: 'You shall not delete!' });       
     }
   } else {
-    res.status(404).json({ message: 'Course Not Found!' });
+    res.status(404).json({ message: 'Course Not Found. :(' });
   }
 }));
 
