@@ -30,26 +30,20 @@ module.exports = (sequelize) => {
         isEmail: {msg: 'Please provide a valid email address',},
       },
     },
-    checkPassword: {
-      type: DataTypes.VIRTUAL, // set a transient field.
+    password: {
+      type: DataTypes.STRING,
       allowNull: false,
       validate: {
         notNull: {msg: 'A password is required.',},
         notEmpty: {msg: 'Please provide a password.',},
-        len: {args: [8, 20],msg: 'The password should be between 8 and 20 characters in length',},
-      },
-    },
-    password: {
-      type: DataTypes.STRING,
-      allowNull: false,
-      set(val) {
-        if (val === this.checkPassword) {
-          const hashedPassword = bcryptjs.hashSync(val, 10);
-          this.setDataValue('password', hashedPassword);
-        }
-      },
-      validate: {
-        notNull: {msg: 'Both passwords must match',},
+        set(val) {
+          if (val.length >= 8 && val.length <= 20) {
+            const hashedPassword = bcryptjs.hashSync(val, 10);
+            this.setDataValue('password', hashedPassword);
+          } else {
+            throw new Error('The password should be between 8 and 15 characters in length!');
+          }
+        },
       },
     },
   }, { sequelize });

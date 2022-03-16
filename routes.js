@@ -26,9 +26,6 @@ function asyncHandler(cb) {
 
 // GET currently authenticated User.
 router.get('/users', authenticateUser, asyncHandler(async (req, res) => {
-  // const user = req.currentUser;
-  // const users = await User.findAll();
-  // res.status(200).json(users);
   const user = await User.findOne({
     where: { id: req.currentUser.id },
     attributes: { exclude: ['password', 'createdAt', 'updatedAt'] }
@@ -40,7 +37,9 @@ router.post('/users', asyncHandler(async (req, res) => {
   let user;
   try {
     user = await User.create(req.body);
-    res.status(201).location("/").json({ message: 'Account successfully created!' }).end();
+    res.status(201)
+      .location('/')
+      .end();
   } catch (error) {
     console.log('ERROR: ', error.name);
 
@@ -90,7 +89,9 @@ router.post('/courses', authenticateUser, asyncHandler(async (req, res) => {
   try {
     course = await Course.create(req.body);
     // res.status(201).location("/courses/" + course.id).end();
-    res.status(201).location("/").json({ message: 'Course successfully created!' }).end();
+    res.status(201)
+      .location('/courses/' + course.id)
+      .end();
   } catch (error) {
     console.log('ERROR: ', error.name);
 
@@ -112,7 +113,8 @@ router.put('/courses/:id', authenticateUser, asyncHandler(async(req, res) => {
     if (course) {
       if (course.userId === user.id) {
         await course.update(req.body);
-        res.status(204).json({ message: 'Course successfully updated!' }).end();
+        res.status(204)
+          .end();
       } else {
         res.status(403).json({ message: 'You shall not edit!' });       
       }      
@@ -138,7 +140,8 @@ router.delete('/courses/:id', authenticateUser, asyncHandler(async(req, res) => 
   if (course) {
     if (course.userId === user.id) {
       await course.destroy();
-      res.status(204).json({ message: 'Course successfully deleted!' }).end();  
+      res.status(204)
+        .end();  
     } else {
         res.status(403).json({ message: 'You shall not delete!' });       
     }
