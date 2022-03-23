@@ -1,3 +1,9 @@
+/****************************
+Treehouse FSJS Techdegree:
+Project 9 - REST API
+Student: Ryan Agatep
+****************************/
+
 'use strict';
 
 // load modules
